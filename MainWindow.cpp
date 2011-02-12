@@ -49,7 +49,7 @@ UnicodeString __fastcall TMainWindowForm::DriveLetterFromMask(ULONG unitmask)
     unitmask = unitmask >> 1;
   }
 
-  return UnicodeString(char(character + 'A'));
+  return char(character + 'A');
 }
 //---------------------------------------------------------------------------
 
@@ -135,7 +135,7 @@ UnicodeString __fastcall TMainWindowForm::DetectMaliciousDirDupe(UnicodeString& 
     ++i;
   }
 
-  /* Folder.exe infection must be treated separatedly */
+  // Folder.exe infection must be treated separatedly
   sPath = Path + ".exe";
   iAttr = GetFileAttributesW(sPath.w_str());
 
@@ -160,60 +160,67 @@ void __fastcall TMainWindowForm::SearchAndDestroy(UnicodeString& Path)
   TSearchRec sr;
 
   if (FindFirst(Path + "\\*", attr, sr)) {
-    SetDisplayMessage("Não foi possivel ler " + Path);
+    SetDisplayMessage("Could not read " + Path);
+    FindClose(sr);
     return;
   }
 
-  do {
-    UnicodeString fpath = Path + "\\" + sr.Name;
-    UINT fattr = GetFileAttributesW(fpath.w_str());
+  SetDisplayMessage("Analyzing " + Path);
 
-    if (fattr == INVALID_FILE_ATTRIBUTES) {
+  do {
+    UnicodeString& sFileName = sr.Name;
+    UnicodeString sFilePath  = Path + "\\" + sFileName;
+
+    UINT iFileAttr = GetFileAttributesW(sFilePath.w_str());
+
+    if (iFileAttr == INVALID_FILE_ATTRIBUTES) {
       continue;
     }
 
-    SetDisplayMessage("Analizando " + fpath);
+    SetDisplayMessage("Analyzing " + sFilePath);
 
-    /* é um diretorio oculto, procure um link de mesmo nome */
-    if (fattr & FILE_ATTRIBUTE_DIRECTORY) {
+    // find suspicious files named as Folder.ext
+    if (iFileAttr & FILE_ATTRIBUTE_DIRECTORY) {
       UnicodeString sDupe;
       int iMaxFailures = 3;
 
-      while (iMaxFailures && (sDupe = DetectMaliciousDirDupe(fpath)) != NULL) {
+      while (iMaxFailures && (sDupe = DetectMaliciousDirDupe(sFilePath)) != NULL) {
         if (DeleteFileW(sDupe.w_str())) {
-          SetDisplayMessage(sDupe + " excluído.");
+          SetDisplayMessage(sDupe + " removed.");
         } else {
           iMaxFailures--;
         }
       }
     } else {
-      if (IsBadFile(sr.Name)) {
-        DeleteFileW(fpath.w_str());
-        SetDisplayMessage(fpath + " excluído.");
+      // find suspicious files e.g. autorun.inf or random.jpg.exe
+      if (IsBadFile(sFileName)) {
+        DeleteFileW(sFilePath.w_str());
+        SetDisplayMessage(sFilePath + " removed.");
       }
     }
 
-    if (!MustStayHidden(sr.Name)) {
-      UINT before = fattr;
-      if (fattr & FILE_ATTRIBUTE_HIDDEN) {
-        fattr -= FILE_ATTRIBUTE_HIDDEN;
+    // some files or directories don't need to be visible
+    if (!MustStayHidden(sFileName)) {
+      UINT before = iFileAttr;
+      if (iFileAttr & FILE_ATTRIBUTE_HIDDEN) {
+        iFileAttr -= FILE_ATTRIBUTE_HIDDEN;
       }
 
-      if (fattr & FILE_ATTRIBUTE_SYSTEM) {
-        fattr -= FILE_ATTRIBUTE_SYSTEM;
+      if (iFileAttr & FILE_ATTRIBUTE_SYSTEM) {
+        iFileAttr -= FILE_ATTRIBUTE_SYSTEM;
       }
 
       // minimize writes
-      if (before != fattr) {
-        SetFileAttributesW(fpath.w_str(), fattr);
-        SetDisplayMessage(fpath + " restaurado.");
+      if (before != iFileAttr) {
+        SetFileAttributesW(sFilePath.w_str(), iFileAttr);
+        SetDisplayMessage(sFilePath + " restaured.");
       }
     }
   } while (FindNext(sr) == 0);
 
   FindClose(sr);
 
-  SetDisplayMessage("Pronto");
+  SetDisplayMessage("Ready");
 }
 //---------------------------------------------------------------------------
 
@@ -234,42 +241,38 @@ void _fastcall TMainWindowForm::SetDisplayMessage(UnicodeString Status)
 void __fastcall TMainWindowForm::WndProc(TMessage &Msg)
 {
   PDEV_BROADCAST_HDR lpdb = PDEV_BROADCAST_HDR(Msg.LParam);
-  PDEV_BROADCAST_VOLUME lpdbv = NULL;
+  PDEV_BROADCAST_VOLUME lpdbv;
   UnicodeString devunit;
   char szMsg[80];
 
-  if (Msg.Msg != WM_DEVICECHANGE) {
+  if (Msg.Msg != WM_DEVICECHANGE || lpdb == NULL) {
     goto exitsub;
   }
 
+  if (lpdb->dbch_devicetype != DBT_DEVTYP_VOLUME) {
+    goto exitsub;
+  }
 
   switch (Msg.WParam) {
   case DBT_DEVICEARRIVAL:
-    if (lpdb->dbch_devicetype != DBT_DEVTYP_VOLUME) {
-      goto exitsub;
-    }
-
     lpdbv = PDEV_BROADCAST_VOLUME(lpdb);
 
     devunit = DriveLetterFromMask(lpdbv->dbcv_unitmask) + ":";
 
-    SetDisplayMessage(devunit +  " foi montado.");
+    SetDisplayMessage(devunit +  " mounted.");
 
     SearchAndDestroy(devunit);
 
     break;
   case DBT_DEVICEREMOVECOMPLETE:
-    if (lpdb->dbch_devicetype != DBT_DEVTYP_VOLUME) {
-      goto exitsub;
-    }
-
     lpdbv = PDEV_BROADCAST_VOLUME(lpdb);
 
     devunit = DriveLetterFromMask(lpdbv->dbcv_unitmask) + ":";
-    SetDisplayMessage(devunit + " foi desmontado.");
+    SetDisplayMessage(devunit + " unmounted.");
 
     break;
   }
+
 exitsub:
   TForm::WndProc(Msg);
 }
@@ -300,7 +303,8 @@ void __fastcall TMainWindowForm::tryIconClick(TObject *Sender)
 
 void __fastcall TMainWindowForm::FormCreate(TObject *Sender)
 {
- SearchAndDestroy(UnicodeString("g:"));
+ //SearchAndDestroy(UnicodeString("g:"));
 }
 //---------------------------------------------------------------------------
+
 

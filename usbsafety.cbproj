@@ -19,9 +19,7 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<BCC_LoopInductionReduction>true</BCC_LoopInductionReduction>
-			<BCC_EliminateDuplicateExpressions>true</BCC_EliminateDuplicateExpressions>
-			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
+			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<OutputExt>exe</OutputExt>
 			<Multithreaded>true</Multithreaded>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
@@ -37,6 +35,8 @@
 			<BCC_wpar>false</BCC_wpar>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<BCC_LoopInductionReduction>false</BCC_LoopInductionReduction>
+			<BCC_EliminateDuplicateExpressions>false</BCC_EliminateDuplicateExpressions>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
@@ -56,6 +56,11 @@
 			<BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<BCC_OptimizeForSize>true</BCC_OptimizeForSize>
+			<BCC_EliminateDuplicateExpressions>true</BCC_EliminateDuplicateExpressions>
+			<BCC_OptimizeJumps>true</BCC_OptimizeJumps>
+			<BCC_DisableOptimizations>false</BCC_DisableOptimizations>
+			<BCC_EliminateDeadStore>true</BCC_EliminateDeadStore>
 			<Defines>NDEBUG;$(Defines)</Defines>
 			<IntermediateOutputDir>Release</IntermediateOutputDir>
 			<ILINK_LibraryPath>$(BDS)\lib\release;$(ILINK_LibraryPath)</ILINK_LibraryPath>
@@ -74,7 +79,6 @@
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
 			<ResFiles Include="usbsafety.res">
-				<ModuleName>usbsafety.res</ModuleName>
 				<BuildOrder>1</BuildOrder>
 			</ResFiles>
 			<FormResources Include="MainWindow.dfm"/>

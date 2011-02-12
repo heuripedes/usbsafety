@@ -2,7 +2,7 @@ object MainWindowForm: TMainWindowForm
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu]
-  BorderStyle = bsDialog
+  BorderStyle = bsSingle
   Caption = 'Usb Safety'
   ClientHeight = 80
   ClientWidth = 345
@@ -13,6 +13,7 @@ object MainWindowForm: TMainWindowForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -24,7 +25,7 @@ object MainWindowForm: TMainWindowForm
     Height = 33
     Alignment = taCenter
     AutoSize = False
-    Caption = 'Pronto'
+    Caption = 'Ready'
     Layout = tlCenter
   end
   object btnExit: TButton
