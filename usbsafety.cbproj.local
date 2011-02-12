@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2011/02/10 21:13:23.125.cpp,C:\Documents and Settings\higor\Meus documentos\RAD Studio\Projects\Unit1.cpp=G:\Deselvolvimento\UsbSafety.cpp</Transaction>
+    <Transaction>2011/02/10 21:13:23.125.h,C:\Documents and Settings\higor\Meus documentos\RAD Studio\Projects\Unit1.h=G:\Deselvolvimento\UsbSafety.h</Transaction>
+    <Transaction>2011/02/10 21:13:23.125.dfm,C:\Documents and Settings\higor\Meus documentos\RAD Studio\Projects\Unit1.dfm=G:\Deselvolvimento\UsbSafety.dfm</Transaction>
+    <Transaction>2011/02/10 21:14:05.000.cbproj,C:\Documents and Settings\higor\Meus documentos\RAD Studio\Projects\Project1.cbproj=G:\Deselvolvimento\UsbSafetyProject.cbproj</Transaction>
+    <Transaction>2011/02/10 22:17:02.156.cpp,C:\Documents and Settings\higor\Desktop\UsbSafety\UsbSafety.cpp=C:\Documents and Settings\higor\Desktop\UsbSafety\MainWindow.cpp</Transaction>
+    <Transaction>2011/02/10 22:17:02.171.h,C:\Documents and Settings\higor\Desktop\UsbSafety\UsbSafety.h=C:\Documents and Settings\higor\Desktop\UsbSafety\MainWindow.h</Transaction>
+    <Transaction>2011/02/10 22:17:02.171.dfm,C:\Documents and Settings\higor\Desktop\UsbSafety\UsbSafety.dfm=C:\Documents and Settings\higor\Desktop\UsbSafety\MainWindow.dfm</Transaction>
+    <Transaction>2011/02/10 22:17:34.234.cbproj,C:\Documents and Settings\higor\Desktop\UsbSafety\UsbSafetyProject.cbproj=C:\Documents and Settings\higor\Desktop\UsbSafety\UsbSafety.cbproj</Transaction>
+    <Transaction>2011/02/11 20:19:12.250.cpp,C:\Documents and Settings\higor\Desktop\UsbSafety\Unit1.cpp=C:\Documents and Settings\higor\Desktop\UsbSafety\TUsbSafety.cpp</Transaction>
+    <Transaction>2011/02/11 20:19:12.265.h,C:\Documents and Settings\higor\Desktop\UsbSafety\Unit1.h=C:\Documents and Settings\higor\Desktop\UsbSafety\TUsbSafety.h</Transaction>
+    <Transaction>2011/02/11 23:49:23.656.h,C:\Documents and Settings\higor\Desktop\UsbSafety\File1.h=C:\Documents and Settings\higor\Desktop\UsbSafety\BadFilesList.h</Transaction>
+    <Transaction>2011/02/12 08:56:49.500.cbproj,C:\Documents and Settings\higor\Desktop\UsbSafety\UsbSafety.cbproj=C:\Documents and Settings\higor\Desktop\UsbSafety\xack.cbproj</Transaction>
+    <Transaction>2011/02/12 08:56:53.109.cbproj,C:\Documents and Settings\higor\Desktop\UsbSafety\xack.cbproj=C:\Documents and Settings\higor\Desktop\UsbSafety\usbsafety.cbproj</Transaction>
+  </Transactions>
+</BorlandProject>
