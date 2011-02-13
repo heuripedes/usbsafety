@@ -128,7 +128,7 @@ UnicodeString __fastcall TMainWindowForm::DetectMaliciousDirDupe(UnicodeString& 
   if (iAttr != INVALID_FILE_ATTRIBUTES) {
     HANDLE hFile = CreateFileW(sPath.w_str(), GENERIC_READ|GENERIC_WRITE, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
-    if (hFile != INVALID_HANDLE_VALUE && GetFileSize(hFile, NULL) < 0x100000) {
+    if (hFile != INVALID_HANDLE_VALUE && GetFileSize(hFile, NULL) < 0x80000) {
       CloseHandle(hFile);
       return sPath;
     }

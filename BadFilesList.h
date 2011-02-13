@@ -49,5 +49,15 @@ static const UnicodeString BadFiles[] = {
     "wscript.exe",
     "uqSkRW.exe",
     "FAantivirus.vbs",
+
+		// those are *nix only (spec by freedesktop.org)
+		"autorun.sh",
+		".autorun",
+		"autorun",
+
+		// stuxnet
+		"~WTR4132.tmp",
+		"~WTR4141.tmp",
+		"Copy of Shortcut to.lnk",
     NULL
   };
