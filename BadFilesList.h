@@ -3,6 +3,7 @@ static const UnicodeString BadFiles[] = {
     "New Folder.exe",
     "newfolder.exe",
     "New_Folder.exe",
+    "Explorer.exe",
     "autorun.vbs",
     "autorun.bat",
     "autorun.exe",
