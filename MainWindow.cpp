@@ -12,20 +12,6 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 
-/*
-fonte: http://support.microsoft.com/kb/967715
-
-Para desativar autorun: (reproduzir aqui)
-1 .Clique em Iniciar, em Executar, digite regedit na caixa Abrir e clique em OK.
-2. Localize e clique na seguinte entrada do Registro:
-   HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Explorer\NoDriveTypeAutorun
-3. Clique com o botão direito em NoDriveTypeAutoRun e clique em Modificar.
-4. Na caixa Dados do valor, digite 0xFF para desabilitar todos os tipos de unidades.
-   Ou use um valor diferente como descrito na seção "Como desabilitar seletivamente
-   recursos específicos do Autorun" para desabilitar seletivamente unidades específicas.
-5. Clique em OK e saia do Editor de Registro.
-6. Reinicie o computador.
-*/
 TMainWindowForm *MainWindowForm;
 //---------------------------------------------------------------------------
 __fastcall TMainWindowForm::TMainWindowForm(TComponent* Owner)
@@ -303,8 +289,57 @@ void __fastcall TMainWindowForm::tryIconClick(TObject *Sender)
 
 void __fastcall TMainWindowForm::FormCreate(TObject *Sender)
 {
+  /*DWORD dwCurValue;
+  HKEY key;
+  DWORD dwType = REG_DWORD;
+  DWORD dwSize = sizeof(DWORD);
+  LONG status;
+
+//  HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Explorer\NoDriveTypeAutorun
+  status = RegOpenKey(HKEY_CURRENT_USER,
+    "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\policies\\Explorer",
+    &key);
+
+  if (status == ERROR_SUCCESS) {
+    status = RegQueryValueEx(key, "NoDriveTypeAutoRun", NULL, &dwType, (LPBYTE)&dwCurValue, &dwSize);
+
+    if (status == ERROR_SUCCESS && dwCurValue != 0xff) {
+      SetDisplayMessage("It is recommended that you turn off autorun.");
+      ShowMessage(int(dwCurValue));
+      //btnAutorun->Show();
+    }
+  }
+
+  RegCloseKey(key);
+  */
  //SearchAndDestroy(UnicodeString("g:"));
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TMainWindowForm::btnAutorunClick(TObject *Sender)
+{
+  /* only works with administrative rights */
+  /*DWORD dwCurValue = 0xff;
+  HKEY key;
+  DWORD dwType = REG_DWORD;
+  DWORD dwSize = sizeof(DWORD);
+  LONG status;
+
+//  HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Explorer\NoDriveTypeAutorun
+  status = RegOpenKey(HKEY_CURRENT_USER,
+    "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\policies\\Explorer",
+    &key);
+
+  if (status == ERROR_SUCCESS) {
+    status = RegSetValueEx(key, "NoDriveTypeAutoRun", 0, dwType, (LPBYTE)dwCurValue, dwSize);
+
+    if (status == ERROR_SUCCESS && dwCurValue == 0xff) {
+      SetDisplayMessage("Autorun turned off.");
+      btnAutorun->Hide();
+    }
+  }
+
+  RegCloseKey(key);*/
+}
+//---------------------------------------------------------------------------
 

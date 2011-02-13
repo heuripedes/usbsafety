@@ -4,8 +4,8 @@ object MainWindowForm: TMainWindowForm
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Usb Safety'
-  ClientHeight = 80
-  ClientWidth = 345
+  ClientHeight = 76
+  ClientWidth = 331
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,7 +21,7 @@ object MainWindowForm: TMainWindowForm
     AlignWithMargins = True
     Left = 0
     Top = 8
-    Width = 341
+    Width = 327
     Height = 33
     Alignment = taCenter
     AutoSize = False
@@ -38,7 +38,7 @@ object MainWindowForm: TMainWindowForm
     OnClick = btnExitClick
   end
   object btnHide: TButton
-    Left = 266
+    Left = 252
     Top = 47
     Width = 75
     Height = 25
@@ -47,10 +47,23 @@ object MainWindowForm: TMainWindowForm
     TabOrder = 1
     OnClick = btnHideClick
   end
+  object btnAutorun: TButton
+    Left = 120
+    Top = 47
+    Width = 105
+    Height = 25
+    Caption = 'Turn off autorun'
+    TabOrder = 2
+    Visible = False
+    OnClick = btnAutorunClick
+  end
   object tryIcon: TTrayIcon
     BalloonTimeout = 1000
     Visible = True
     OnClick = tryIconClick
     Left = 10
+  end
+  object XPManifest1: TXPManifest
+    Left = 50
   end
 end

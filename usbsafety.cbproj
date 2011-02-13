@@ -67,6 +67,12 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<CppCompile Include="usbsafety.cpp">
+				<BuildOrder>0</BuildOrder>
+			</CppCompile>
+			<ResFiles Include="usbsafety.res">
+				<BuildOrder>1</BuildOrder>
+			</ResFiles>
 			<CppCompile Include="MainWindow.cpp">
 				<Form>MainWindowForm</Form>
 				<DependentOn>MainWindow.h</DependentOn>
@@ -75,12 +81,6 @@
 			<None Include="BadFilesList.h">
 				<BuildOrder>3</BuildOrder>
 			</None>
-			<CppCompile Include="usbsafety.cpp">
-				<BuildOrder>0</BuildOrder>
-			</CppCompile>
-			<ResFiles Include="usbsafety.res">
-				<BuildOrder>1</BuildOrder>
-			</ResFiles>
 			<FormResources Include="MainWindow.dfm"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>

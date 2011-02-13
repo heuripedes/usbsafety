@@ -8,6 +8,7 @@
 #include <StdCtrls.hpp>
 #include <Forms.hpp>
 #include <ExtCtrls.hpp>
+#include <XPMan.hpp>
 //---------------------------------------------------------------------------
 class TMainWindowForm : public TForm
 {
@@ -16,10 +17,13 @@ __published:	// IDE-managed Components
   TButton *btnExit;
   TButton *btnHide;
   TTrayIcon *tryIcon;
+  TXPManifest *XPManifest1;
+  TButton *btnAutorun;
   void __fastcall btnExitClick(TObject *Sender);
   void __fastcall btnHideClick(TObject *Sender);
   void __fastcall tryIconClick(TObject *Sender);
   void __fastcall FormCreate(TObject *Sender);
+  void __fastcall btnAutorunClick(TObject *Sender);
 private:	// User declarations
 	void __fastcall SearchAndDestroy(UnicodeString& Path);
   UnicodeString __fastcall DriveLetterFromMask(ULONG unitmask);
